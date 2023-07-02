@@ -15,6 +15,7 @@ class Server {
 		this.categorysPath = '/api/categoria';
         this.rolesPath = '/api/roles';
 		this.shopPath = '/api/shop'
+		this.authPath = '/api/auth'
 
 		// middleware
 		this.middlewares();
@@ -35,6 +36,10 @@ class Server {
 				'Content-Type, Authorization'
 			);
 			next();
+			this.app.use(cookieParser()); 
+			this.app.use(express.static(__dirname + "/public"));
+			this.app.use(cors());
+			this.app.use(bodyParser.json());
 		});
 
 		this.app.use(express.json());
@@ -52,6 +57,7 @@ class Server {
 		this.app.use(this.insumosPath, require('../routes/InsumoRoute'));
 		this.app.use(this.categorysPath, require('../routes/CategoryRoute'));
 		this.app.use(this.shopPath, require('../routes/ShopRoute'));
+		this.app.use(this.authPath, require('../routes/auth'))
 	}
 
 	async conectarDb() {
