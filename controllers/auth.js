@@ -1,6 +1,6 @@
-const Usuario = require('../models/usuario')
-const bcrypt = require('bcrypt')
-const { generarJWT } = require('../helpers/generar-jwt')
+const Usuario = require('../models/UserModel');
+const bcrypt = require('bcrypt');
+const { generarJWT } = require('../helpers/generar-jwt');
 const jwt = require('jsonwebtoken');
 
 async function comparePassword(plaintextPassword, hash) {
